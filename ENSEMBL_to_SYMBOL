@@ -1,5 +1,8 @@
-BiocManager::install("org.HS.eg.db")
+BiocManager::install("org.Hs.eg.db")
 BiocManager::install("AnnotationDbi")
-library("org.HS.eg.db")
+library("org.Hs.eg.db")
 counts.df <- as.data.frame(normalized_counts)
-counts.df$symbol <- mapIds(org.HS.eg.db, keys = !rownames(counts.df), keytype = "ENSEMBL", column = "SYMBOL")
+counts.df2 <- counts.df[,-1]
+rownames(counts.df2) <- counts.df[,1]
+counts.df2$symbol <- mapIds(org.Hs.eg.db, keys = rownames(counts.df2), keytype = "ENSEMBL", column = "SYMBOL")
+write.csv(counts.df2,"counts.csv")
