@@ -1,0 +1,5 @@
+BiocManager::install("org.HS.eg.db")
+BiocManager::install("AnnotationDbi")
+library("org.HS.eg.db")
+counts.df <- as.data.frame(normalized_counts)
+counts.df$symbol <- mapIds(org.HS.eg.db, keys = !rownames(counts.df), keytype = "ENSEMBL", column = "SYMBOL")
